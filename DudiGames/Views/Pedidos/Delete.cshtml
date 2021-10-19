@@ -1,0 +1,54 @@
+﻿@model DudiGames.Models.ViewModel.PedidoViewModel
+@{
+    ViewData["Title"] = "Deletar";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>Vc realmente deseja deletar?</h4>
+<hr />
+<div class="row">
+    <h4>Venda</h4>
+    <hr />
+    @Html.HiddenFor(model => model.PedidoId)
+<dl class="dl-horizontal">
+    <dt>
+        
+        @Html.DisplayNameFor(model => model.DataVenda)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.DataVenda)
+
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.NomeProduto)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.NomeProduto)
+
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.ValorVenda)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.ValorVenda)
+
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.NomeCliente)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.NomeCliente)
+
+    </dd>
+</dl>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="PedidoId" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index">Voltar para a Lista</a>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

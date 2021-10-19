@@ -1,0 +1,64 @@
+﻿@model DudiGames.Models.ViewModel.PedidoViewModel
+@{
+    ViewData["Title"] = "Cadastrar";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+
+<h4>Pedido</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.DataVenda, htmlAttributes: new { @class = "control-label" })
+
+                @Html.EditorFor(model => model.DataVenda, new { htmlAttributes = new { @class = "control-label" } })
+                @Html.ValidationMessageFor(model => model.DataVenda, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.NomeProduto, htmlAttributes: new { @class = "control-label" })
+
+                @Html.DropDownListFor(model => model.ProdutoId, new SelectList(ViewBag.ProdutoId, "Id", "Nome"), htmlAttributes: new { @class = "control-label" })
+                @Html.ValidationMessageFor(model => model.ProdutoId, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.Quantidade, htmlAttributes: new { @class = "control-label" })
+
+                @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "control-label" } })
+                @Html.ValidationMessageFor(model => model.Quantidade, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.ValorVenda, htmlAttributes: new { @class = "control-label" })
+
+                @Html.EditorFor(model => model.ValorVenda, new { htmlAttributes = new { @class = "control-label" } })
+                @Html.ValidationMessageFor(model => model.ValorVenda, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NomeCliente, htmlAttributes: new { @class = "control-label" })
+
+                @Html.DropDownListFor(model => model.ClienteId, new SelectList(ViewBag.ClienteId, "Id", "Nome"), htmlAttributes: new { @class = "control-label" })
+                @Html.ValidationMessageFor(model => model.ClienteId, "", new { @class = "text-danger" })
+            </div>
+            
+
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<DudiGames.Models.ViewModel.CompraViewModel>
+
+@{
+    ViewData["Title"] = "Compra";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (ViewBag.Retorno != null)
+{
+    <p class="text-success">Compra salva</p>
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-default">Nova Compra</a>
+</p>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr class="success">
+            
+            <th>
+                @Html.DisplayNameFor(model => model.DataCompra)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeProduto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorCompra)
+            </th>
+            
+
+            <th></th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataCompra)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeProduto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorCompra)
+                </td>
+               
+
+
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalhar</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+                </td>
+            </tr>
+
+        }
+
+    
+    </tbody>
+
+
+</table>
+<p>
+    <a asp-controller="Estoques" asp-action="Index" class="btn btn-default">Estoque</a>
+
+</p>

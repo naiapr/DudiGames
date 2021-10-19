@@ -1,0 +1,81 @@
+﻿@model IEnumerable<DudiGames.Models.ViewModel.PedidoViewModel>
+
+@{
+    ViewData["Title"] = "Venda";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+
+<p>
+    <a asp-action="Create" class="btn btn-default">Nova Venda</a>
+</p>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr class="success">
+
+            <th>
+                @Html.DisplayNameFor(model => model.DataVenda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeProduto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorVenda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeCliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalVenda)
+            </th>
+
+            <th></th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataVenda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeProduto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorVenda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeCliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalVenda)
+            </td>
+
+
+
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PedidoId">Editar</a>
+                <a asp-action="Details" asp-route-id="@item.PedidoId">Detalhar</a>
+                <a asp-action="Delete" asp-route-id="@item.PedidoId">Deletar</a>
+            </td>
+        </tr>
+
+        }
+
+
+    </tbody>
+
+
+</table>
+

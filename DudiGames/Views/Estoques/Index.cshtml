@@ -1,0 +1,70 @@
+﻿@model IEnumerable<DudiGames.Models.ViewModel.EstoqueViewModel>
+
+@{
+    ViewData["Title"] = "Estoque";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr class="success">
+
+            <th>
+                @Html.DisplayNameFor(model => model.NomeProdutoComprado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuantidadeProduto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecoUnitario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PreçoTotalProduto)
+            </th>
+
+
+            <th></th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeProdutoComprado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuantidadeProduto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecoUnitario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PreçoTotalProduto)
+            </td>
+
+
+        </tr>
+
+        }
+
+
+    </tbody>
+
+
+</table>
+<div>
+    <a>Valor Total do Estoque <input value="@ViewBag.ValorTotal" /></a>
+</div>
+<div>
+    <a>Total Produtos do Estoque<input value="@ViewBag.TotalProdutos" /></a>
+</div>
+
+<p>
+    <a asp-controller="Financeiros" asp-action="Index" class="btn btn-default">Capital</a>
+
+</p>

@@ -1,0 +1,59 @@
+﻿@model DudiGames.Models.ViewModel.CompraViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>Compra</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            @Html.HiddenFor(model => model.Id);
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+
+
+                @Html.LabelFor(model => model.DataCompra, htmlAttributes: new { @class = "control-label" })
+
+                @Html.EditorFor(model => model.DataCompra, new { htmlAttributes = new { @class = "control-label" } })
+                @Html.ValidationMessageFor(model => model.DataCompra, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.ProdutoId, htmlAttributes: new { @class = "control-label" })
+
+                @Html.DropDownListFor(model => model.ProdutoId, new SelectList(ViewBag.ProdutoId, "Id", "Nome"), htmlAttributes: new { @class = "control-label" })
+                @Html.ValidationMessageFor(model => model.ProdutoId, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.Quantidade, htmlAttributes: new { @class = "control-label" })
+
+                @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "control-label" } })
+                @Html.ValidationMessageFor(model => model.Quantidade, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.ValorCompra, htmlAttributes: new { @class = "control-label" })
+
+                @Html.EditorFor(model => model.ValorCompra, new { htmlAttributes = new { @class = "control-label" } })
+                @Html.ValidationMessageFor(model => model.ValorCompra, "", new { @class = "text-danger" })
+            </div>
+            
+
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

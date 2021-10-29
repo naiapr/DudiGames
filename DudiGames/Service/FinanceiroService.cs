@@ -31,10 +31,10 @@ namespace DudiGames.Service
             var listaFinanceiro = _context.Financeiro.ToList();
             foreach (var financeiro in listaFinanceiro)
             {
-                Capital capital = new Capital();
+               Capital capital = new Capital();
                 FinanceiroViewModel f = new FinanceiroViewModel();
                 f.Id = financeiro.Id;
-                f.CapitalGiro = _capitalService.FindById(capital.Id).CapitaldeGiro;
+                f.CapitalGiro = _capitalService.FindById(financeiro.CapitalId).CapitaldeGiro;
                 f.NomeProduto = _produtoService.FindById(financeiro.ProdutoId).Nome;
                 f.PrecoUnitario = financeiro.PrecoUnitario;
                 f.DataVenda = financeiro.DataVenda;
@@ -72,19 +72,24 @@ namespace DudiGames.Service
         public void SalvarFinanceiro(PedidoViewModel pedidoViewModel)
 
         {
-            Capital capital = new Capital();
+            
             Financeiro financeiro = new Financeiro();
             financeiro.PedidoId = pedidoViewModel.PedidoId;
             financeiro.ProdutoId = pedidoViewModel.ProdutoId;
+            financeiro.CapitalId = pedidoViewModel.CapitalId;
             financeiro.PrecoUnitario = _context.Estoque.FirstOrDefault(x => x.ProdutoId == pedidoViewModel.ProdutoId).PrecoUnitario;
             financeiro.DataVenda = pedidoViewModel.DataVenda;
             financeiro.PrecoVenda = pedidoViewModel.ValorVenda;
+         
+
            
             var valorCusto = _context.Estoque.FirstOrDefault(x => x.ProdutoId == pedidoViewModel.ProdutoId).PrecoUnitario;
             var lucro = pedidoViewModel.ValorVenda - valorCusto;
 
+            Capital capital = new Capital();
+            capital = _context.Capital.FirstOrDefault(x => x.Id == financeiro.CapitalId);
             //var capital = financeiro.CapitalGiro - financeiro.PrecoUnitario;
-          
+
             financeiro.CapitalGiro = capital.CapitaldeGiro;
             _context.Update(financeiro);
 

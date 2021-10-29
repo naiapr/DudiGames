@@ -18,6 +18,7 @@ namespace DudiGames.Service
 
         public void AdicionarCapital(Capital capital)
         {
+            
             _context.Add(capital);
 
             _context.SaveChanges();
@@ -42,5 +43,8 @@ namespace DudiGames.Service
         {
             throw new NotImplementedException();
         }
+
+
+       
     }
 }

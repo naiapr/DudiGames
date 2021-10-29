@@ -3,14 +3,16 @@ using System;
 using DudiGames.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DudiGames.Migrations
 {
     [DbContext(typeof(DudiGamesContext))]
-    partial class DudiGamesContextModelSnapshot : ModelSnapshot
+    [Migration("20211028182548_BDfim")]
+    partial class BDfim
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,7 +28,17 @@ namespace DudiGames.Migrations
                     b.Property<double>("CapitaldeGiro")
                         .HasColumnType("double");
 
+                    b.Property<int>("CompraId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PedidoId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CompraId");
+
+                    b.HasIndex("PedidoId");
 
                     b.ToTable("Capital");
                 });
@@ -106,8 +118,8 @@ namespace DudiGames.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<double>("CapitalGiro")
-                        .HasColumnType("double");
+                    b.Property<int>("CapitalGiro")
+                        .HasColumnType("int");
 
                     b.Property<int>("CapitalId")
                         .HasColumnType("int");
@@ -142,9 +154,6 @@ namespace DudiGames.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("CapitalId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
@@ -161,8 +170,6 @@ namespace DudiGames.Migrations
                         .HasColumnType("double");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CapitalId");
 
                     b.HasIndex("ClienteId");
 
@@ -183,6 +190,21 @@ namespace DudiGames.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Produto");
+                });
+
+            modelBuilder.Entity("DudiGames.Models.Capital", b =>
+                {
+                    b.HasOne("DudiGames.Models.Compra", "Compra")
+                        .WithMany()
+                        .HasForeignKey("CompraId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DudiGames.Models.Pedido", "Pedido")
+                        .WithMany()
+                        .HasForeignKey("PedidoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DudiGames.Models.Compra", b =>
@@ -224,12 +246,6 @@ namespace DudiGames.Migrations
 
             modelBuilder.Entity("DudiGames.Models.Pedido", b =>
                 {
-                    b.HasOne("DudiGames.Models.Capital", "Capital")
-                        .WithMany()
-                        .HasForeignKey("CapitalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DudiGames.Models.Cliente", "Cliente")
                         .WithMany()
                         .HasForeignKey("ClienteId")

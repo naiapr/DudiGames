@@ -3,14 +3,16 @@ using System;
 using DudiGames.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DudiGames.Migrations
 {
     [DbContext(typeof(DudiGamesContext))]
-    partial class DudiGamesContextModelSnapshot : ModelSnapshot
+    [Migration("20211021181901_capincom")]
+    partial class capincom
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,6 +53,9 @@ namespace DudiGames.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("CapitalId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DataCompra")
                         .HasColumnType("datetime(6)");
 
@@ -60,10 +65,15 @@ namespace DudiGames.Migrations
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
+                    b.Property<double>("SaldoCapital")
+                        .HasColumnType("double");
+
                     b.Property<double>("ValorCompra")
                         .HasColumnType("double");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CapitalId");
 
                     b.HasIndex("ProdutoId");
 
@@ -106,8 +116,8 @@ namespace DudiGames.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<double>("CapitalGiro")
-                        .HasColumnType("double");
+                    b.Property<int>("CapitalGiro")
+                        .HasColumnType("int");
 
                     b.Property<int>("CapitalId")
                         .HasColumnType("int");
@@ -142,9 +152,6 @@ namespace DudiGames.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("CapitalId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
@@ -161,8 +168,6 @@ namespace DudiGames.Migrations
                         .HasColumnType("double");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CapitalId");
 
                     b.HasIndex("ClienteId");
 
@@ -187,6 +192,12 @@ namespace DudiGames.Migrations
 
             modelBuilder.Entity("DudiGames.Models.Compra", b =>
                 {
+                    b.HasOne("DudiGames.Models.Capital", "capital")
+                        .WithMany()
+                        .HasForeignKey("CapitalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DudiGames.Models.Produto", "Produto")
                         .WithMany()
                         .HasForeignKey("ProdutoId")
@@ -209,7 +220,7 @@ namespace DudiGames.Migrations
 
             modelBuilder.Entity("DudiGames.Models.Financeiro", b =>
                 {
-                    b.HasOne("DudiGames.Models.Capital", "capital")
+                    b.HasOne("DudiGames.Models.Capital", "caital")
                         .WithMany()
                         .HasForeignKey("CapitalId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -224,12 +235,6 @@ namespace DudiGames.Migrations
 
             modelBuilder.Entity("DudiGames.Models.Pedido", b =>
                 {
-                    b.HasOne("DudiGames.Models.Capital", "Capital")
-                        .WithMany()
-                        .HasForeignKey("CapitalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DudiGames.Models.Cliente", "Cliente")
                         .WithMany()
                         .HasForeignKey("ClienteId")

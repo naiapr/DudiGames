@@ -15,13 +15,15 @@ namespace DudiGames.Service
         private readonly EstoqueService _estoqueService;
         private readonly ProdutoService _produtoService;
         private readonly ClienteService _clienteService;
+        private readonly CapitalService _capitalService;
 
-        public PedidoService(DudiGamesContext context, EstoqueService estoqueService, ProdutoService produtoService, ClienteService clienteService)
+        public PedidoService(DudiGamesContext context, EstoqueService estoqueService, ProdutoService produtoService, ClienteService clienteService, CapitalService capitalService)
         {
             _context = context;
             _estoqueService = estoqueService;
             _produtoService = produtoService;
             _clienteService = clienteService;
+            _capitalService = capitalService;
         }
 
         public void AdicionarPedido(PedidoViewModel pedidoViewModel)
@@ -36,6 +38,8 @@ namespace DudiGames.Service
             pedido.ValorVenda = pedidoViewModel.ValorVenda;
             pedido.Cliente = pedidoViewModel.Cliente;
             pedido.ClienteId = pedidoViewModel.ClienteId;
+            pedido.Capital = pedidoViewModel.Capital;
+            pedido.CapitalId = _capitalService.FindById(pedido.CapitalId).Id;
             _context.Add(pedido);
             
             _context.SaveChanges();
@@ -53,7 +57,9 @@ namespace DudiGames.Service
             pedido.ValorVenda = pedidoViewModel.ValorVenda;
             pedido.Cliente = pedidoViewModel.Cliente;
             pedido.ClienteId = pedidoViewModel.ClienteId;
-            
+            pedido.Capital = pedidoViewModel.Capital;
+            pedido.CapitalId = pedidoViewModel.CapitalId;
+
             _context.Pedido.Update(pedido);
             _context.SaveChanges();
         }

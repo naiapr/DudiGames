@@ -32,7 +32,7 @@ namespace DudiGames.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Capital capital)
-        {
+         {
             if (!ModelState.IsValid)
             {
                 return View(capital);

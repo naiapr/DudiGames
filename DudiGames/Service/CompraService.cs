@@ -13,39 +13,45 @@ namespace DudiGames.Service
     {
         private readonly DudiGamesContext _context;
         private readonly ProdutoService _produtoService;
-        
 
         public CompraService(DudiGamesContext context, ProdutoService produtoService)
         {
             _context = context;
             _produtoService = produtoService;
-          
         }
 
         public void AdicionarCompra(CompraViewModel compraViewModel)
-        {
-            Compra compra = new Compra();
+                {
+            
            
+            Compra compra = new Compra();
+
             compra.DataCompra = compraViewModel.DataCompra;
             compra.Produto = compraViewModel.Produto;
             compra.ProdutoId = compraViewModel.ProdutoId;
             compra.Quantidade = compraViewModel.Quantidade;
             compra.ValorCompra = compraViewModel.ValorUnitarioProduto*compraViewModel.Quantidade;
+            
             _context.Add(compra);
             
             _context.SaveChanges();
             compraViewModel.Id = compra.Id;
+
         }
 
         public void EditarCompra(CompraViewModel compraViewModel)
         {
             Compra compra = new Compra();
+            Capital capital = new Capital();
+            capital = _context.Capital.FirstOrDefault(obj => obj.Id == capital.Id);
+
             compra.Id = compraViewModel.Id;
             compra.DataCompra = compraViewModel.DataCompra;
             compra.Produto = compraViewModel.Produto;
             compra.ProdutoId = compraViewModel.ProdutoId;
             compra.Quantidade = compraViewModel.Quantidade;
             compra.ValorCompra = compraViewModel.ValorCompra;
+            
             _context.Compra.Update(compra);
             _context.SaveChanges();
         }
@@ -57,6 +63,8 @@ namespace DudiGames.Service
             foreach (var compra in listaCompra)
             {
                 CompraViewModel c = new CompraViewModel();
+                
+
                 c.Id = compra.Id;
                 c.ProdutoId = compra.ProdutoId;
                 c.DataCompra = compra.DataCompra;
@@ -64,6 +72,8 @@ namespace DudiGames.Service
                 c.Quantidade = compra.Quantidade;
                 c.ValorCompra = compra.ValorCompra;
                 c.ValorTotalCompra = ValorTotalCompra(compra.ValorCompra, compra.Quantidade);
+                
+                
                 lista.Add(c);
 
             }
@@ -85,6 +95,7 @@ namespace DudiGames.Service
             compraViewModel.ValorCompra = compra.ValorCompra;
             compraViewModel.Quantidade = compra.Quantidade;
             compraViewModel.ValorTotalCompra = ValorTotalCompra(compra.ValorCompra, compra.Quantidade);
+            
             return compraViewModel;
         }
 
@@ -139,5 +150,11 @@ namespace DudiGames.Service
 
             return compra;
         }
+
+       /* public double SaldoCapital(double capitalGiro, double valorCompra)
+        {
+            var saldo = capitalGiro - valorCompra;
+            return saldo;
+        }*/
     }
 }

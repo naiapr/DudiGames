@@ -3,14 +3,16 @@ using System;
 using DudiGames.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DudiGames.Migrations
 {
     [DbContext(typeof(DudiGamesContext))]
-    partial class DudiGamesContextModelSnapshot : ModelSnapshot
+    [Migration("20211029190421_final")]
+    partial class final
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,8 +108,8 @@ namespace DudiGames.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<double>("CapitalGiro")
-                        .HasColumnType("double");
+                    b.Property<int>("CapitalGiro")
+                        .HasColumnType("int");
 
                     b.Property<int>("CapitalId")
                         .HasColumnType("int");
@@ -142,9 +144,6 @@ namespace DudiGames.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("CapitalId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
@@ -161,8 +160,6 @@ namespace DudiGames.Migrations
                         .HasColumnType("double");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CapitalId");
 
                     b.HasIndex("ClienteId");
 
@@ -224,12 +221,6 @@ namespace DudiGames.Migrations
 
             modelBuilder.Entity("DudiGames.Models.Pedido", b =>
                 {
-                    b.HasOne("DudiGames.Models.Capital", "Capital")
-                        .WithMany()
-                        .HasForeignKey("CapitalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DudiGames.Models.Cliente", "Cliente")
                         .WithMany()
                         .HasForeignKey("ClienteId")

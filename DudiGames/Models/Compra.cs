@@ -12,7 +12,7 @@ namespace DudiGames.Models
         public int ProdutoId { get; set; }
         public int Quantidade { get; set; }
         public double ValorCompra { get; set; }
-        
+      
         public DateTime DataCompra { get; set; }
 
         public Compra()
@@ -29,10 +29,13 @@ namespace DudiGames.Models
             ValorCompra = valorCompra;
             DataCompra = dataCompra;
         }
+
         public double ValorTotalCompra(double valorCompra, int quantidade)
         {
             var vtc = valorCompra * quantidade;
             return vtc;
         }
+
+       
     }
 }

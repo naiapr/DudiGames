@@ -10,7 +10,7 @@ namespace DudiGames.Models.ViewModel
         public int Id { get; set; }
         public Produto Produto { get; set; }
         public double ValorUnitarioProduto { get; set; }
-
+      
         public double ValorCompra { get; set; }
         public int Quantidade { get; set; }
         public DateTime DataCompra { get; set; }
@@ -18,5 +18,6 @@ namespace DudiGames.Models.ViewModel
         public string NomeProduto { get; set; }
         public ICollection<Produto> Produtos { get; set; }
         public double ValorTotalCompra { get; set; }
+       
     }
 }

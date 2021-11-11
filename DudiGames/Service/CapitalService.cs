@@ -26,7 +26,10 @@ namespace DudiGames.Service
 
         public void EditarCapital(Capital capital)
         {
-            throw new NotImplementedException();
+            var obj = _context.Capital.Find(capital.Id);
+            obj.CapitaldeGiro = capital.CapitaldeGiro;
+            _context.Update(capital);
+            _context.SaveChanges();
         }
 
         public List<Capital> FindAll()
@@ -41,7 +44,10 @@ namespace DudiGames.Service
 
         public void RemoverCapital(Capital capital)
         {
-            throw new NotImplementedException();
+            var obj = _context.Capital.Find(capital.Id);
+            obj.CapitaldeGiro = capital.CapitaldeGiro;
+            _context.Capital.Remove(obj);
+            _context.SaveChanges();
         }
 
 

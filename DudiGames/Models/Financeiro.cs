@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace DudiGames.Models
 {
     public class Financeiro
     {
         public int Id { get; set; }
-        public double CapitalGiro { get; set; }
+       // public double CapitalGiro { get; set; }
        // public Estoque Estoque { get; set; }
         public int ProdutoId { get; set; }
-        public Capital capital { get; set; }
-        public int CapitalId { get; set; }
+        //public Capital capital { get; set; }
+        //public int CapitalId { get; set; }
         public double PrecoUnitario { get; set; }
         public Pedido Pedido { get; set; }
         public int PedidoId { get; set; }
@@ -27,13 +25,10 @@ namespace DudiGames.Models
 
         }
 
-        public Financeiro(int id, int capitalGiro, int produtoId, Capital capital, int capitalId, double precoUnitario, Pedido pedido, int pedidoId, DateTime dataVenda, double precoVenda)
+        public Financeiro(int id, int produtoId, double precoUnitario, Pedido pedido, int pedidoId, DateTime dataVenda, double precoVenda)
         {
             Id = id;
-            CapitalGiro = capitalGiro;
             ProdutoId = produtoId;
-            this.capital = capital;
-            CapitalId = capitalId;
             PrecoUnitario = precoUnitario;
             Pedido = pedido;
             PedidoId = pedidoId;
@@ -41,14 +36,13 @@ namespace DudiGames.Models
             PrecoVenda = precoVenda;
         }
 
-        
         public double Lucro(double precoVenda, double precoUnitario) 
         {
             return precoVenda - precoUnitario;
         }
-        public double SaldoCapital(double capitalGiro, double preçoUnitario)
+       /* public double SaldoCapital(double capitalGiro, double preçoUnitario)
         {
             return capitalGiro - preçoUnitario;
-        }
+        }*/
     }
 }

@@ -12,10 +12,12 @@ namespace DudiGames.Controllers
 
     {
         private readonly CapitalService _capitalService;
+        private readonly FinanceiroService _financeiroService;
 
-        public CapitalController(CapitalService capitalService)
+        public CapitalController(CapitalService capitalService, FinanceiroService financeiroService)
         {
             _capitalService = capitalService;
+            _financeiroService = financeiroService;
         }
 
         public IActionResult Index()
@@ -38,7 +40,49 @@ namespace DudiGames.Controllers
                 return View(capital);
             }
 
-            _capitalService.AdicionarCapital(capital);
+
+           _capitalService.AdicionarCapital(capital);
+   
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Capital capital)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(capital);
+            }
+
+            _capitalService.EditarCapital(capital);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Details(int? Id)
+        {
+            var obj = _capitalService.FindById(Id.Value);
+            if (Id == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+        public IActionResult Delete(int? Id)
+        {
+            var obj = _capitalService.FindById(Id.Value);
+            if (Id == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(Capital capital)
+        {
+            _capitalService.RemoverCapital(capital);
             return RedirectToAction(nameof(Index));
         }
     }

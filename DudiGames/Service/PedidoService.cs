@@ -30,7 +30,10 @@ namespace DudiGames.Service
         {
           
             Pedido pedido = new Pedido();
-            
+            Capital capital = new Capital();
+            //int Id = 0;
+           // capital = _context.Capital.Add(capital);
+
             pedido.DataVenda = pedidoViewModel.DataVenda;
             pedido.Produto = pedidoViewModel.Produto;
             pedido.ProdutoId = pedidoViewModel.ProdutoId;
@@ -38,8 +41,8 @@ namespace DudiGames.Service
             pedido.ValorVenda = pedidoViewModel.ValorVenda;
             pedido.Cliente = pedidoViewModel.Cliente;
             pedido.ClienteId = pedidoViewModel.ClienteId;
-            pedido.Capital = pedidoViewModel.Capital;
-            pedido.CapitalId = _capitalService.FindById(pedido.CapitalId).Id;
+            //pedido.CapitalId = pedidoViewModel.Capital.Id;
+            //pedido.CapitalGiro = pedidoViewModel.Capital.CapitaldeGiro;
             _context.Add(pedido);
             
             _context.SaveChanges();
@@ -57,8 +60,8 @@ namespace DudiGames.Service
             pedido.ValorVenda = pedidoViewModel.ValorVenda;
             pedido.Cliente = pedidoViewModel.Cliente;
             pedido.ClienteId = pedidoViewModel.ClienteId;
-            pedido.Capital = pedidoViewModel.Capital;
-            pedido.CapitalId = pedidoViewModel.CapitalId;
+            //pedido.Capital = pedidoViewModel.Capital;
+            //pedido.CapitalId = pedidoViewModel.CapitalId;
 
             _context.Pedido.Update(pedido);
             _context.SaveChanges();

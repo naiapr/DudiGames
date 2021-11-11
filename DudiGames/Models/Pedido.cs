@@ -13,16 +13,16 @@ namespace DudiGames.Models
         public int Quantidade { get; set; }
         public double ValorVenda { get; set; }
         public Cliente Cliente { get; set; }
+        
         public int ProdutoId { get; set; }
         public int ClienteId { get; set; }
-        public Capital Capital { get; set; }
-        public int CapitalId { get; set; }
+        
         public Pedido()
         {
 
         }
 
-        public Pedido(int id, DateTime dataVenda, Produto produto, int quantidade, double valorVenda, Cliente cliente, int produtoId, int clienteId, Capital capital, int capitalId)
+        public Pedido(int id, DateTime dataVenda, Produto produto, int quantidade, double valorVenda, Cliente cliente, int produtoId, int clienteId)
         {
             Id = id;
             DataVenda = dataVenda;
@@ -32,8 +32,6 @@ namespace DudiGames.Models
             Cliente = cliente;
             ProdutoId = produtoId;
             ClienteId = clienteId;
-            Capital = capital;
-            CapitalId = capitalId;
         }
 
         public double TotalVenda(double valorVenda, int quantidade)

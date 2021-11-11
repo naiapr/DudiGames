@@ -3,14 +3,16 @@ using System;
 using DudiGames.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DudiGames.Migrations
 {
     [DbContext(typeof(DudiGamesContext))]
-    partial class DudiGamesContextModelSnapshot : ModelSnapshot
+    [Migration("20211111174509_LastMigration")]
+    partial class LastMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,6 +26,12 @@ namespace DudiGames.Migrations
                         .HasColumnType("int");
 
                     b.Property<double>("CapitaldeGiro")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Entrada")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Saida")
                         .HasColumnType("double");
 
                     b.HasKey("Id");

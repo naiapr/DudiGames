@@ -9,6 +9,8 @@ namespace DudiGames.Models
     {
         public int Id { get; set; }
         public double CapitaldeGiro { get; set; }
+        
+      
 
         public Capital()
         {
@@ -20,6 +22,7 @@ namespace DudiGames.Models
             Id = id;
             CapitaldeGiro = capitaldeGiro;
         }
+
     }
 
 

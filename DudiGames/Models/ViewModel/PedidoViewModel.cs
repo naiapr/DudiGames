@@ -17,9 +17,6 @@ namespace DudiGames.Models.ViewModel
         public Cliente Cliente { get; set; }
         public int ClienteId { get; set; }
         public string NomeCliente { get; set; }
-
-        public Capital Capital { get; set; }
-        public int CapitalId { get; set; }
         public ICollection<Produto> Produtos { get; set; }
         public ICollection<Cliente> Clientes { get; set; }
         public double TotalVenda { get; set; }

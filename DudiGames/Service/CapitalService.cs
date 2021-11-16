@@ -28,8 +28,10 @@ namespace DudiGames.Service
         {
             var obj = _context.Capital.Find(capital.Id);
             obj.CapitaldeGiro = capital.CapitaldeGiro;
-            _context.Update(capital);
+            _context.Update(obj);
             _context.SaveChanges();
+
+           
         }
 
         public List<Capital> FindAll()

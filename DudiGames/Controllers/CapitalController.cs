@@ -45,6 +45,16 @@ namespace DudiGames.Controllers
    
             return RedirectToAction(nameof(Index));
         }
+        public IActionResult Edit(int? Id)
+        {
+            var obj = _capitalService.FindById(Id.Value);
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
